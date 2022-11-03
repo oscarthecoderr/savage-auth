@@ -4,16 +4,12 @@ var trash = document.getElementsByClassName("fa-trash-o");
 
 Array.from(thumbUp).forEach(function(element) {
       element.addEventListener('click', function(){
-        const name = this.parentNode.parentNode.childNodes[1].innerText
-        const msg = this.parentNode.parentNode.childNodes[3].innerText
-        const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
+        const _id = this.parentNode.parentNode.getAttribute('id')
         fetch('thumbUp', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            'name': name,
-            'msg': msg,
-            'thumbUp':thumbUp
+            '_id': _id
           })
         })
         .then(response => {
@@ -28,16 +24,12 @@ Array.from(thumbUp).forEach(function(element) {
 
 Array.from(thumbDown).forEach(function(element) {
   element.addEventListener('click', function(){
-    const name = this.parentNode.parentNode.childNodes[1].innerText
-    const msg = this.parentNode.parentNode.childNodes[3].innerText
-    const thumbDown = parseFloat(this.parentNode.parentNode.childNodes[7].innerText)
+    const _id= this.parentNode.parentNode.getAttribute('id')
     fetch('thumbDown', {
       method: 'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        'name': name,
-        'msg': msg,
-        'thumbDown':thumbDown
+        '_id': _id
       })
     })
     .then(response => {

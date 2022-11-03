@@ -1,3 +1,5 @@
+const { ObjectID } = require("mongodb").ObjectId;
+
 module.exports = function(app, passport, db) {
 
 // normal routes ===============================================================
@@ -38,9 +40,9 @@ module.exports = function(app, passport, db) {
 
     app.put('/thumbUp', (req, res) => {
       db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbUp:req.body.thumbUp + 1
+      .findOneAndUpdate({_id: ObjectID(req.body._id)}, {
+        $inc: {
+          thumbUp:1
         }
       }, {
         sort: {_id: -1},
@@ -53,9 +55,9 @@ module.exports = function(app, passport, db) {
 
     app.put('/thumbDown', (req, res) => {
       db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-        $set: {
-          thumbDown:req.body.thumbDown - 1
+      .findOneAndUpdate({_id: ObjectID(req.body._id)}, {
+        $inc: {
+          thumbDown: 1
         }
       }, {
         sort: {_id: -1},
